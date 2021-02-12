@@ -20,11 +20,23 @@ app.set('views',path.join(__dirname,'views'));
 app.get('/',(req,res)=>{
     res.render('home')
 })
-app.get('/makebars',async (req,res)=>{
-    const bar = new Bars({name:'Birdie Nam Nam',price:'$$', description:'cool bar at kembangan'});
-    await bar.save();
-    res.send(bar);
+
+app.get('/bars',async(req,res)=>{
+    const bars = await Bars.find({});
+    res.render('bars/index',{bars});
 })
+
+app.get('/bars/:id',async(req,res)=>{
+    const {id} = req.params;
+    const bar = await Bars.findById(id);
+    res.render('bars/show',{bar});
+})
+
+// app.get('/makebars',async (req,res)=>{
+//     const bar = new Bars({name:'Birdie Nam Nam',price:'$$', description:'cool bar at kembangan'});
+//     await bar.save();
+//     res.send(bar);
+// })
 
 
 app.listen(8080, ()=>{
