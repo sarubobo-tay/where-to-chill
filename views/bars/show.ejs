@@ -9,5 +9,16 @@
     <h1><%=bar.name%></h1>
     <h2><%=bar.location.display_address%></h2>
     <img src="<%=bar.image_url%>" alt="">
+    <form action="/bars/<%=bar._id%>?_method=delete" method="POST">
+        <button>Delete</button>
+    </form>
+    <footer>
+        <p>
+            <a href="/bars/<%=bar._id%>/edit">Edit Information</a>
+        </p>
+        <p>
+            <a href="/bars">Back to All Bars</a>
+        </p>
+    </footer>
 </body>
 </html>

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create a new input</title>
+</head>
+<body>
+    <form action="/bars" method="POST">
+        <div>
+            <label for="name">Name of bar</label>
+            <input type="text" name="bars[name]" id="name">
+        </div>
+        <div>
+            <label for="location">Location of Bar</label>
+            <input type="text" name="bars[location.display_address]" id="location">
+        </div>
+        <button>Add New Bar</button>
+        </form>
+</body>
+</html>
