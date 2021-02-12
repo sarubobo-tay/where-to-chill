@@ -1,0 +1,17 @@
+{
+  "name": "wheretochill",
+  "version": "1.0.0",
+  "description": "A webApp focused on mapping out bars across Singapore and providing user inputs for review",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Sherman Tay",
+  "license": "ISC",
+  "dependencies": {
+    "ejs": "^3.1.6",
+    "express": "^4.17.1",
+    "method-override": "^3.0.0",
+    "mongoose": "^5.11.15"
+  }
+}
