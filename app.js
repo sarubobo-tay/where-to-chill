@@ -4,9 +4,9 @@ const path = require('path');
 const mongoose = require('mongoose');
 const methodOverride = require('method-override');
 const Schema = mongoose.Schema;
-var Bars = require('./models/bars');
-const { red } = require('colors');
-const { findById, findByIdAndDelete } = require('./models/bars');
+const Bars = require('./models/bars');
+const engine = require('ejs-mate');
+// var morgan = require('morgan');
 
 mongoose.connect('mongodb://localhost:27017/where-chill', { useNewUrlParser: true, useUnifiedTopology: true })
 .then(() => {
@@ -21,7 +21,8 @@ app.set('view engine', 'ejs');
 app.set('views',path.join(__dirname,'views'));
 app.use(express.urlencoded({extended:true}));
 app.use(methodOverride('_method'));
-
+app.engine('ejs',engine);
+// app.use(morgan('tiny'));
 
 
 app.get('/',(req,res)=>{

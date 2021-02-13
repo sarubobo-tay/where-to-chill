@@ -1,21 +1,37 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Create a new input</title>
-</head>
-<body>
-    <form action="/bars" method="POST">
-        <div>
-            <label for="name">Name of bar</label>
-            <input type="text" name="bars[name]" id="name">
+<% layout('layouts/boilerplate')%>
+    <div class="row">
+        <h1 class="text-center">Upload New Listing</h1>
+        <div class="col-6 offset-3">
+            <form action="/bars" method="POST">
+                <div class="mb-3">
+                    <label for="name" class ="form-label">Name of Bar</label>
+                    <input type="text" class="form-control" name="bars[name]" id="name">
+                </div>
+                <div class="mb-3">
+                    <label for="location" class ="form-label">Displayed Address</label>
+                    <input type="text" class="form-control" name="bars[location.display_address]" id="location">
+                </div>
+                <div class="input-group">
+                    <span class="input-group-text">Address Details</span>
+                    <input type="text" name="bars[location.address1]" class="form-control" placeholder="Street Address">
+                    <input type="text" name="bars[location.zip_code]" class="form-control" placeholder="Postal code">
+                  </div>
+                  <div class="mb-3 mt-2">
+                    <label for="image_url" class ="form-label">Image URL</label>
+                    <input type="text" class="form-control" name="bars[image_url]" id="image_url">
+                </div>
+                <div>
+                    <label for="price" class ="form-label">Price Range </label>
+                
+                <div class="input-group">
+                    <span class="input-group-text" id="addon-wrapping">$</span>
+                    <input type="text" class="form-control" name="bars[price]" id="price" placeholder="from $ to $$$$" aria-describedby="addon-wrapping">
+                </div>
+            </div>
+                <button class="btn btn-primary mt-5">Add New Bar</button>
+                </form>
+            <p>
+                <a href="/bars">Back to Bars</a>
+            </p>
         </div>
-        <div>
-            <label for="location">Location of Bar</label>
-            <input type="text" name="bars[location.display_address]" id="location">
-        </div>
-        <button>Add New Bar</button>
-        </form>
-</body>
-</html>
+    </div>

@@ -34,10 +34,19 @@ const BarSchema = new Schema({
         address1:String,
         address2:String,
         address3:String,
-        city:String,
+        city:{
+            type:String,
+            default:"SG"
+        },
         zip_code:Number,
-        country:String,
-        state:String,
+        country:{
+            type:String,
+            default:"SG"
+        },
+        state:{
+            type:String,
+            default:"SG"
+        },
         display_address: [{type:String}]
     },
     phone:String,

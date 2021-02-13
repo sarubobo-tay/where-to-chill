@@ -1,23 +1,45 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edit Bar Information</title>
-</head>
-<body>
-    <h1>Edit Bar Information</h1>
-    <form action="/bars/<%=bar._id%>?_method=PUT" method="POST">
-        <div>
-            <label for="name">Name of bar</label>
-            <input type="text" name="bars[name]" id="name" value = "<%=bar.name%>">
+<% layout('layouts/boilerplate')%>
+
+    <div class="row">
+        <h1 class="text-center">Edit Bar Information</h1>
+        <div class="col-6 offset-3">
+            <form action="/bars/<%=bar._id%>?_method=PUT" method="POST">
+                <div class="mb-3">
+                    <label for="name" class ="form-label">Name of Bar</label>
+                    <input type="text" class="form-control" name="bars[name]" id="name" value = "<%=bar.name%>">
+                </div>
+                <div class="mb-3">
+                    <label for="location" class ="form-label">Displayed Address</label>
+                    <input type="text" class="form-control" name="bars[location.display_address]" id="location" value ="<%=bar.location.display_address%>">
+                </div>
+                <div class="input-group">
+                    <span class="input-group-text">Address Details</span>
+                    <input type="text" name="bars[location.address1]" class="form-control" placeholder="Street Address"value ="<%=bar.location.address1%>">
+                    <input type="text" name="bars[location.zip_code]" class="form-control" placeholder="Postal code"value ="<%=bar.location.zip_code%>">
+                  </div>
+                  <div class="mb-3 mt-2">
+                    <label for="image_url" class ="form-label">Image URL</label>
+                    <input type="text" class="form-control" name="bars[image_url]" id="image_url" value="<%=bar.image_url%>">
+                </div>
+                <div>
+                    <label for="price" class ="form-label">Price Range </label>
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="addon-wrapping">$</span>
+                    <input type="text" class="form-control" value ='<%=bar.price%>' name="bars[price]" id="price" placeholder="from $ to $$$$" aria-describedby="addon-wrapping">
+                </div>
+                <div class ="mb-3">
+                    <label for="is_closed" class="form-label">Status of Business</label>
+                    <select class="form-select" aria-label="Default select example" id="is_closed" name="bars[is_closed]">
+                        <option selected value=false>Open for Business</option>
+                        <option value=true>Closed Down</option>
+                      </select>
+                </div>
+                
+            </div>
+                <button class="btn btn-primary mt-1">Update Bar Information</button>
+                </form>
+            <p>
+                <a class ="btn btn-secondary mt-3 "href="/bars">Back to Bars</a>
+            </p>
         </div>
-        <div>
-            <label for="location">Location of Bar</label>
-            <input type="text" name="bars[location.display_address]" id="location" value ="<%=bar.location.display_address%>">
-        </div>
-        <button>Update Bar Information</button>
-        </form>
-    <!-- <form action="/bars/?_edit" method ="POST"></form> -->
-</body>
-</html>
+    </div>

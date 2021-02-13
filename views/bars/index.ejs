@@ -1,16 +1,27 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bars</title>
-</head>
-<body>
+<% layout('layouts/boilerplate')%>
+
     <h1>All Available Bars</h1>
-    <ul>
-        <%for(let bar of bars) {%>
-            <li><a href="/bars/<%=bar._id%>"><%=bar.name%></a></li>
+    <div>
+        <a class ="btn btn-success mb-3 "href="/bars/new">Add a new listing</a>
+    </div>
+    <%for(let bar of bars) {%>
+    <div class="card">
+        <div class="row">
+            <div class="col-md-4">
+                <a href="/bars/<%=bar._id%>">
+                <img class ="img-fluid" alt="<%=bar.name%> image" src ="<%=bar.image_url%>">
+                </a>
+            </div>
+            <div class="col-md-8">
+                <h5 class="card-title">
+                    <%=bar.name%>               </h5>
+                <p class="card-text"><b>Address: </b><%=bar.location.display_address%></p>
+                <p class="card-text"><b>Rating: </b><%=bar.rating%>/5</p>
+                <a href="/bars/<%=bar._id%>" class="btn btn-danger">View <%=bar.name%></a>
+                <p class="card-text">
+                    <small class="text-muted">Tel: <%=bar.display_phone%></small>
+                </p>
+            </div>
+        </div>
+        </div>
         <% }%>
-    </ul>
-</body>
-</html>

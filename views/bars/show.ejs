@@ -1,24 +1,29 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Show</title>
-</head>
-<body>
-    <h1><%=bar.name%></h1>
-    <h2><%=bar.location.display_address%></h2>
-    <img src="<%=bar.image_url%>" alt="">
-    <form action="/bars/<%=bar._id%>?_method=delete" method="POST">
-        <button>Delete</button>
-    </form>
+<% layout('layouts/boilerplate')%>
+
+<div class="row">
+    <div class="col-8 offset-2">
+        <h1><%=bar.name%></h1>
+        <div class="card">
+            <img src="<%=bar.image_url%>" class="card-img-top" alt="Image of Bar">
+            <div class="card-body">
+              <h5 class="card-title"><%=bar.location.display_address%></h5>
+              <p class="card-text text-muted"><%=bar.location.country%>,<%=bar.location.city%></p>
+              <p class="card-text text-muted">Coordinates: (<%=bar.coordinates.latitude%>,<%=bar.coordinates.longitude%>)</p>
+
+
+              <div class="card-body">
+                <a class ="btn btn-primary" href="/bars/<%=bar._id%>/edit">Edit Information</a>
+
+                <a class ="btn btn-secondary" href="/bars">Back to All Bars</a>
+                <form class ="d-inline" action="/bars/<%=bar._id%>?_method=delete" method="POST">
+                    <button class="btn btn-danger">Delete Listing</button>
+                  </form>
+
+              </div>
+            </div>
+          </div>
+    </div>
+</div>
+  
     <footer>
-        <p>
-            <a href="/bars/<%=bar._id%>/edit">Edit Information</a>
-        </p>
-        <p>
-            <a href="/bars">Back to All Bars</a>
-        </p>
     </footer>
-</body>
-</html>
