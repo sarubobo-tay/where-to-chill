@@ -13,8 +13,14 @@
                 </a>
             </div>
             <div class="col-md-8">
-                <h5 class="card-title">
-                    <%=bar.name%>               </h5>
+                <h5 class="card-title"><%=bar.name%></h5>
+                <p class="card-text text-muted">
+                    <%if(bar.is_closed === true){%>
+                        Bar is Closed for good.
+                    <%} else{%>
+                        Bar is Open for Business!
+                        <%}%>
+                    </p>
                 <p class="card-text"><b>Address: </b><%=bar.location.display_address%></p>
                 <p class="card-text"><b>Rating: </b><%=bar.rating%>/5</p>
                 <a href="/bars/<%=bar._id%>" class="btn btn-danger">View <%=bar.name%></a>

@@ -9,6 +9,13 @@
               <h5 class="card-title"><%=bar.location.display_address%></h5>
               <p class="card-text text-muted"><%=bar.location.country%>,<%=bar.location.city%></p>
               <p class="card-text text-muted">Coordinates: (<%=bar.coordinates.latitude%>,<%=bar.coordinates.longitude%>)</p>
+              <p class="card-text text-muted">
+                <%if(bar.is_closed === true){%>
+                    Bar is Closed for good.
+                <%} else{%>
+                    Bar is Open for Business!
+                    <%}%>
+                </p>
 
 
               <div class="card-body">
