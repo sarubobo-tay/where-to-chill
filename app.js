@@ -72,6 +72,17 @@ app.delete('/bars/:id',async(req,res)=>{
     res.redirect('/bars');
 })
 
+app.get('/error',(req,res)=>{
+    blablah.blah();
+})
+
+app.use((err,req,res,next)=>{
+    // res.status(500).send('ERROR! see terminal')
+    console.log("**************************")
+    console.log("***********ERROR**********")
+    console.log("**************************")
+    next(err);
+})
 
 app.listen(8080, ()=>{
     console.log('Running on Port 8080')
