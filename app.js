@@ -9,6 +9,10 @@ const engine = require('ejs-mate');
 const catchAsync =require('./helpers/catchAsync');
 const ExpressError =require('./helpers/ExpressError');
 const Joi = require('joi');
+const Review = require('./models/review');
+const bars = require('./models/bars');
+// const {barSchema, reviewSchema} = require('./schemas.js');
+
 
 // var morgan = require('morgan');
 
@@ -28,15 +32,26 @@ app.use(methodOverride('_method'));
 app.engine('ejs',engine);
 // app.use(morgan('tiny'));
 
-const validateBars = (req,res,next) =>{
-    const {error} = barSchema.validate(req.body);
-    if(error){
-        const msg = error.details.map(el=>el.message).join(',')
-        throw new ExpressError(msg,400)
-    } else{
-        next();
-    }
-}
+// const validateBars = (req,res,next) =>{
+//     const {error} = barSchema.validate(req.body);
+//     if(error){
+//         const msg = error.details.map(el=>el.message).join(',')
+//         throw new ExpressError(msg,400)
+//     } else{
+//         next();
+//     }
+// }
+
+// const validateReview = (req,res,next) =>{
+//     const {error} = reviewSchema.validate(req.body);
+//     if(error){
+//         const msg = error.details.map(el=>el.message).join(',')
+//         throw new ExpressError(msg,400)
+//     } else{
+//         next();
+//     }
+// }
+
 
 app.get('/',(req,res)=>{
     res.render('home')
@@ -47,11 +62,11 @@ app.get('/bars/new',(req,res)=>{
     res.render('bars/new')
 })
 
-app.post('/bars', validateBars, catchAsync( async(req,res)=>{
+app.post('/bars', catchAsync( async(req,res)=>{
     // if(!req.body.bars) throw new ExpressError('Invalid Input Data',400);
    
     const bar = new Bars(req.body.bars);
-    await bard.save();
+    await bar.save();
     res.redirect(`/bars/${bar._id}`);
 }))
 
@@ -63,7 +78,7 @@ app.get('/bars',catchAsync(async(req,res)=>{
 
 app.get('/bars/:id',catchAsync(async(req,res)=>{
     const {id} = req.params;
-    const bar = await Bars.findById(id);
+    const bar = await Bars.findById(id).populate('reviews');
     res.render('bars/show',{bar});
 }))
 //Update
@@ -73,7 +88,7 @@ app.get('/bars/:id/edit', catchAsync(async(req,res)=>{
     res.render('bars/edit',{bar});
 }))
 
-app.put('/bars/:id',catchAsync(async(req,res)=>{
+app.put('/bars/:id', catchAsync(async(req,res)=>{
     const {id} = req.params;
     const bar = await Bars.findByIdAndUpdate(id,{...req.body.bars});
     res.redirect(`/bars/${bar._id}`);
@@ -86,14 +101,31 @@ app.delete('/bars/:id',catchAsync(async(req,res)=>{
     res.redirect('/bars');
 }))
 
+app.delete('/bars/:id/reviews/:reviewId',catchAsync(async(req,res)=>{
+    const {id, reviewId} = req.params;
+    await Bars.findByIdAndUpdate(id,{$pull:{reviews:reviewId}});
+    await Review.findByIdAndDelete(reviewId);
+    res.redirect(`/bars/${id}`);
+}))
+
 app.get('/error',(req,res)=>{
     blablah.blah();
 })
-
+//review route
+app.post('/bars/:id/review', catchAsync(async(req,res)=>{
+    const bar = await Bars.findById(req.params.id);
+    const review = new Review(req.body.review);
+    bar.reviews.push(review);
+    await review.save();
+    await bar.save();
+    res.redirect(`/bars/${bar._id}`)
+}))
 //all routes not called.
 app.all('*',(req,res,next)=>{
     next(new ExpressError('Page not Found',404))
 })
+
+
 
 //error handler (this is the next.)
 app.use((err,req,res,next)=>{

@@ -1,36 +1,95 @@
 <% layout('layouts/boilerplate')%>
 
 <div class="row">
-    <div class="col-8 offset-2">
-        <h1><%=bar.name%></h1>
-        <div class="card">
-            <img src="<%=bar.image_url%>" class="card-img-top" alt="Image of Bar">
+  <div class="col-6">
+    <h1><%=bar.name%></h1>
+    <div class="card">
+      <img src="<%=bar.image_url%>" class="card-img-top" alt="Image of Bar" />
+      <div class="card-body">
+        <h5 class="card-title"><%=bar.location.display_address%></h5>
+        <p class="card-text text-muted">
+          <%=bar.location.country%>,<%=bar.location.city%>
+        </p>
+        <p class="card-text text-muted">
+          Coordinates:
+          (<%=bar.coordinates.latitude%>,<%=bar.coordinates.longitude%>)
+        </p>
+
+        <p class="card-text text-muted">
+          <%if(bar.is_closed === true){%> Bar is Closed for good. <%} else{%>
+          Bar is Open for Business! <%}%>
+        </p>
+
+        <p class="card-text text-muted">
+          url: <a href="<%=bar.url%>">Link to Site</a>
+        </p>
+
+        <div class="card-body">
+          <a class="btn btn-primary" href="/bars/<%=bar._id%>/edit"
+            >Edit Information</a
+          >
+
+          <a class="btn btn-secondary" href="/bars">Back to All Bars</a>
+          <form
+            class="d-inline"
+            action="/bars/<%=bar._id%>?_method=delete"
+            method="POST"
+          >
+            <button class="btn btn-danger">Delete Listing</button>
+          </form>
+        </div>
+      </div>
+    </div>
+    
+    </div>
+    <div class="col-6">
+      <h2 class="mt-3 mb-3">Leave a Review</h2>
+        <form
+          action="/bars/<%=bar._id%>/review"
+          method="POST"
+          novalidate
+          class="validatedForm"
+        >
+          <div class="mb-3">
+            <label class="form-label" for="rating">Rating</label>
+            <input
+              class="form-range"
+              type="range"
+              name="review[rating]"
+              id="rating"
+              min="0"
+              max="5"
+            />
+          </div>
+          <div class="mb-3">
+            <label class="form-label" for="review">Review</label>
+            <textarea
+              class="form-control"
+              name="review[body]"
+              id="review"
+              cols="30"
+              rows="4"
+              required
+            ></textarea>
+            <div class="valid-feedback">Looks Good</div>
+            <button class="btn btn-success mt-3">Add Review</button>
+          </div>
+        </form>
+        <div class="mb-3">
+          <% for(let review of bar.reviews){%>
+          <div class="card mb-3">
             <div class="card-body">
-              <h5 class="card-title"><%=bar.location.display_address%></h5>
-              <p class="card-text text-muted"><%=bar.location.country%>,<%=bar.location.city%></p>
-              <p class="card-text text-muted">Coordinates: (<%=bar.coordinates.latitude%>,<%=bar.coordinates.longitude%>)</p>
-              <p class="card-text text-muted">
-                <%if(bar.is_closed === true){%>
-                    Bar is Closed for good.
-                <%} else{%>
-                    Bar is Open for Business!
-                    <%}%>
-                </p>
-
-
-              <div class="card-body">
-                <a class ="btn btn-primary" href="/bars/<%=bar._id%>/edit">Edit Information</a>
-
-                <a class ="btn btn-secondary" href="/bars">Back to All Bars</a>
-                <form class ="d-inline" action="/bars/<%=bar._id%>?_method=delete" method="POST">
-                    <button class="btn btn-danger">Delete Listing</button>
-                  </form>
-
-              </div>
+              <h5 class="card-title">Rating: <%=review.rating%></h5>
+              <p><%=review.body%></p>
+              <form action="/bars/<%=bar._id%>/reviews/<%=review._id%>?_method=DELETE" method ="POST">
+              <button class ="btn btn-danger btn-sm">Delete</button></form>
             </div>
           </div>
+          <%}%>
+        </div>
     </div>
-</div>
+  </div>
   
-    <footer>
-    </footer>
+
+
+<footer></footer>
