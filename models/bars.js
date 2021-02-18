@@ -52,6 +52,11 @@ const BarSchema = new Schema({
     phone:String,
     display_phone:String,
     // distance:Number
+    author:{
+        type: Schema.Types.ObjectId,
+        ref:'User',
+        default: "602e91fdc9fbf77222b16150"
+    },
     reviews:[
         {
             type:Schema.Types.ObjectId,

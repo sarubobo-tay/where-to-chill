@@ -6,11 +6,18 @@ const ExpressError =require('../helpers/ExpressError');
 
 const Bars = require('../models/bars');
 const Review = require('../models/review');
+const {isLoggedIn, isOwner, isReviewOwner} = require('../middleware');
+const user = require('../models/user');
 
 
 router.post('/', catchAsync(async(req,res)=>{
     const bar = await Bars.findById(req.params.id);
     const review = new Review(req.body.review);
+    if(req.user == null){
+        review.author = '602ea2e247191a745d76f2de'
+    } else {
+        review.author = req.user._id
+    }
     bar.reviews.push(review);
     await review.save();
     await bar.save();
@@ -18,9 +25,7 @@ router.post('/', catchAsync(async(req,res)=>{
     res.redirect(`/bars/${bar._id}`)
 }))
 
-router.delete('/:reviewId',catchAsync(async(req,res)=>{
-    console.log(req.params);
-    console.log(res.body);
+router.delete('/:reviewId',isLoggedIn, isReviewOwner, catchAsync(async(req,res)=>{
     const {id, reviewId} = req.params;
     await Bars.findByIdAndUpdate(id,{$pull:{reviews:reviewId}});
     await Review.findByIdAndDelete(reviewId);

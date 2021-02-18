@@ -26,17 +26,19 @@
 
         <div class="card-body">
           <a class="btn btn-primary" href="/bars/<%=bar._id%>/edit"
-            >Edit Information</a
-          >
+            >Edit Information</a>
 
           <a class="btn btn-secondary" href="/bars">Back to All Bars</a>
+          <% if(currentUser && bar.author.equals(currentUser)){%>
           <form
             class="d-inline"
             action="/bars/<%=bar._id%>?_method=delete"
-            method="POST"
-          >
+            method="POST">
             <button class="btn btn-danger">Delete Listing</button>
           </form>
+          <%} else{%>
+            <a class = "btn btn-dark text-muted"href="#">Log in Admin to Delete</a>
+          <%}%>
         </div>
       </div>
     </div>
@@ -80,9 +82,12 @@
           <div class="card mb-3">
             <div class="card-body">
               <h5 class="card-title">Rating: <%=review.rating%></h5>
+              <h6 class="card-subtitle mb-2 text-muted">By <%=review.author.username%></h6>
               <p><%=review.body%></p>
+              
               <form action="/bars/<%=bar._id%>/review/<%=review._id%>?_method=DELETE" method ="POST">
               <button class ="btn btn-danger btn-sm">Delete</button></form>
+               
             </div>
           </div>
           <%}%>
