@@ -4,13 +4,15 @@ const catchAsync =require('../helpers/catchAsync');
 const ExpressError =require('../helpers/ExpressError');
 const Bars = require('../models/bars');
 const methodOverride = require('method-override');
+const {isLoggedIn} = require('../middleware');
 
 //Create
-router.get('/new',(req,res)=>{
+router.get('/new', isLoggedIn, (req,res)=>{
+    
     res.render('bars/new')
 })
 
-router.post('/', catchAsync( async(req,res)=>{
+router.post('/', isLoggedIn,catchAsync( async(req,res)=>{
     // if(!req.body.bars) throw new ExpressError('Invalid Input Data',400);
    
     const bar = new Bars(req.body.bars);
@@ -53,7 +55,7 @@ router.put('/:id', catchAsync(async(req,res)=>{
 }))
 
 //Delete
-router.delete('/:id',catchAsync(async(req,res)=>{
+router.delete('/:id',isLoggedIn,catchAsync(async(req,res)=>{
     const {id} = req.params;
     const bar = await Bars.findByIdAndDelete(id);
     req.flash('success','Deleted!');
