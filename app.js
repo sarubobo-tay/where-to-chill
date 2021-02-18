@@ -7,10 +7,14 @@ const engine = require('ejs-mate');
 const ExpressError =require('./helpers/ExpressError');
 const session = require('express-session');
 const flash = require('connect-flash');
+const passport = require('passport');
+const LocalStrategy = require('passport-local').Strategy;
+const User = require('./models/user');
 
 //Routes
-const bars = require('./routes/bars');
-const reviews = require('./routes/reviews');
+const barsRoutes = require('./routes/bars');
+const reviewRoutes = require('./routes/reviews');
+const userRoutes = require('./routes/users');
 
 //Connect to db
 mongoose.connect('mongodb://localhost:27017/where-chill', { 
@@ -53,15 +57,27 @@ const sessionConfig ={
 app.use(session(sessionConfig));
 app.use(flash());
 
+app.use(passport.initialize());
+app.use(passport.session());
+passport.use(new LocalStrategy(User.authenticate()));
+
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+
+
+
 app.use((req,res,next)=>{
     res.locals.success = req.flash('success');
     res.locals.error = req.flash('error');
     next();
 })
 
+app.get 
+
 //tidy routes.
-app.use('/bars',bars);
-app.use('/bars/:id/review',reviews);
+app.use('/bars',barsRoutes);
+app.use('/bars/:id/review',reviewRoutes);
+app.use('/',userRoutes);
 
 //homepage
 app.get('/',(req,res)=>{
