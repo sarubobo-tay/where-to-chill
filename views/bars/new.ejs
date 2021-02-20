@@ -2,7 +2,7 @@
     <div class="row">
         <h1 class="text-center">Upload New Listing</h1>
         <div class="col-6 offset-3">
-            <form action="/bars" method="POST" novalidate class="validatedForm">
+            <form action="/bars" method="POST" novalidate class="validatedForm" enctype="multipart/form-data">
                 <div class="mb-3">
                     <label for="name" class ="form-label">Name of Bar</label>
                     <input type="text" class="form-control" name="bars[name]" id="name" required>
@@ -21,11 +21,11 @@
                         Looks Good
                     </div>
                 </div>
-                
-                  <div class="mb-3 mt-2">
+                <input type="file" name="image" multiple>
+                  <!-- <div class="mb-3 mt-2">
                     <label for="image_url" class ="form-label">Image URL</label>
                     <input type="text" class="form-control" name="bars[image_url]" id="image_url">
-                </div>
+                </div> -->
                 <div class="mb-3">
                     <label for="url" class ="form-label">Link to Site or Menu if available</label>
                     <input type="text" class="form-control" name="bars[url]" id="url" >

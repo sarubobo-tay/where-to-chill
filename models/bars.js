@@ -1,3 +1,4 @@
+const { string } = require('joi');
 const mongoose = require('mongoose');
 const Review = require('./review');
 const Schema = mongoose.Schema;
@@ -9,7 +10,11 @@ const BarSchema = new Schema({
         type: String,
         required:true
     },
-    image_url:String,
+    images:[{
+        _id:{id:false},
+        url:String,
+        filename:String,
+    }],
     is_closed: Boolean,
     url: String,
     // review_count:Number,

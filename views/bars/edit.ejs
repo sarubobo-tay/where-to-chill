@@ -3,7 +3,7 @@
     <div class="row">
         <h1 class="text-center">Edit Bar Information</h1>
         <div class="col-6 offset-3">
-            <form action="/bars/<%=bar._id%>?_method=PUT" method="POST" novalidate class="validatedForm">
+            <form action="/bars/<%=bar._id%>?_method=PUT" method="POST" novalidate class="validatedForm" enctype="multipart/form-data">
                 <div class="mb-3">
                     <label for="name" class ="form-label">Name of Bar</label>
                     <input type="text" class="form-control" name="bars[name]" id="name" value = "<%=bar.name%>" required>
@@ -16,14 +16,9 @@
                     <label for="zip_code" class ="form-label">Postal Code</label>
                     <input type="text" class="form-control" name="bars[location.zip_code]" id="zip_code" value ="<%=bar.location.zip_code%>"required>
                 </div>
-                <!-- <div class="input-group">
-                    <span class="input-group-text">Address Details</span>
-                    <input type="text" name="bars[location.address1]" class="form-control" placeholder="Street Address"value ="<%=bar.location.address1%>">
-                    <input type="text" name="bars[location.zip_code]" class="form-control" placeholder="Postal code"value ="<%=bar.location.zip_code%>">
-                  </div> -->
                   <div class="mb-3 mt-2">
-                    <label for="image_url" class ="form-label">Image URL</label>
-                    <input type="text" class="form-control" name="bars[image_url]" id="image_url" value="<%=bar.image_url%>">
+                    <label for="image" class ="form-label">Add Images</label>
+                    <input type="file" name="image" id="image" multiple>
                 </div>
                   <div class="mb-3 mt-2">
                     <label for="image_url" class ="form-label">URL (if available)</label>
