@@ -124,6 +124,7 @@ app.use((err,req,res,next)=>{
     res.status(statusCode).render('partials/error',{statusCode,message})
 })
 
-app.listen(8080, ()=>{
-    console.log('Running on Port 8080')
+const port = process.env.PORT ||3000; 
+app.listen(port, ()=>{
+    console.log(`Running on Port ${port}`)
 })
