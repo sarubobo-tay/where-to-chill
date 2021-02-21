@@ -13,6 +13,7 @@ const session = require('express-session');
 const flash = require('connect-flash');
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
+const MongoStore = require('connect-mongo')(session);
 const User = require('./models/user');
 
 
@@ -20,9 +21,12 @@ const User = require('./models/user');
 const barsRoutes = require('./routes/bars');
 const reviewRoutes = require('./routes/reviews');
 const userRoutes = require('./routes/users');
-
+// const dbUrl = 'mongodb://localhost:27017/where-chill';
+const dbUrl = process.env.DB_URL;
 //Connect to db
-mongoose.connect('mongodb://localhost:27017/where-chill', { 
+// process.env.DB_URL
+//'mongodb://localhost:27017/where-chill'
+mongoose.connect(dbUrl ||'mongodb://localhost:27017/where-chill', { 
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useFindAndModify:false,
@@ -47,10 +51,22 @@ app.use(express.urlencoded({extended:true}));
 app.use(methodOverride('_method'));
 app.use(express.static(path.join(__dirname,'public')));
 
+const secret = process.env.SECRET || 'backupsecret';
+
+const store = new MongoStore({
+    url: dbUrl,
+    secret: secret,
+    touchAfter:24*3600
+});
+
+store.on("error", function(e){
+    console.log("session store error",e)
+})
 
 const sessionConfig ={
+    store,
     name :"session",
-    secret:'qwerty123',
+    secret:secret,
     resave:false,
     saveUninitialized:true,
     cookie:{
