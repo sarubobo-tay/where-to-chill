@@ -1,5 +1,4 @@
 <% layout('layouts/boilerplate')%>
-<!-- <link rel="stylesheet" href="/css/stars.css"> -->
 
 <div class="row">
   <div class="col-6">
@@ -29,9 +28,10 @@
         <p class="card-text text-muted">
           <%=bar.location.country%>,<%=bar.location.city%>
         </p>
+        <div id='map' style='width: 100%; height: 300px;'></div>
         <p class="card-text text-muted">
           Coordinates:
-          (<%=bar.coordinates.latitude%>,<%=bar.coordinates.longitude%>)
+          (<%=bar.geometry.coordinates[0]%>,<%=bar.geometry.coordinates[1]%>)
         </p>
 
         <p class="card-text text-muted">
@@ -164,3 +164,7 @@
 </div>
 
 <footer></footer>
+<script>
+  const bar = <%-JSON.stringify(bar)%>
+</script>
+<script src="/js/mapBox.js"></script>

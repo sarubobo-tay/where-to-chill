@@ -1,56 +1,110 @@
 <% layout('layouts/boilerplate')%>
 
-    <div class="row">
-        <h1 class="text-center">Edit Bar Information</h1>
-        <div class="col-8 offset-2">
-            <form action="/bars/<%=bar._id%>?_method=PUT" method="POST" novalidate class="validatedForm" enctype="multipart/form-data">
-                <div class="mb-3">
-                    <label for="name" class ="form-label">Name of Bar</label>
-                    <input type="text" class="form-control" name="bars[name]" id="name" value = "<%=bar.name%>" required>
-                </div>
-                <div class="mb-3">
-                    <label for="location" class ="form-label">Displayed Address</label>
-                    <input type="text" class="form-control" name="bars[location.display_address]" id="location" value ="<%=bar.location.display_address%>"required>
-                </div>
-                <div class="mb-3">
-                    <label for="zip_code" class ="form-label">Postal Code</label>
-                    <input type="text" class="form-control" name="bars[location.zip_code]" id="zip_code" value ="<%=bar.location.zip_code%>"required>
-                </div>
-                <div class="mb-3">
-                    <label for="image" class="form-label">Add Images</label>
-                    <input class="form-control" type="file" name ="image" id="image" multiple>
-                  </div>
-                  <div class="mb-3 mt-2">
-                    <label for="image_url" class ="form-label">URL (if available)</label>
-                    <input type="text" class="form-control" name="bars[url]" id="image_url" value="<%=bar.url%>">
-                </div>
-                <div>
-                    <label for="price" class ="form-label">Price Range </label>
-                <div class="input-group mb-3">
-                    <span class="input-group-text" id="addon-wrapping">$</span>
-                    <input type="text" class="form-control" value ='<%=bar.price%>' name="bars[price]" id="price" placeholder="from $ to $$$$" aria-describedby="addon-wrapping"required>
-                </div>
-                <div class ="mb-3">
-                    <label for="is_closed" class="form-label">Status of Business</label>
-                    <select class="form-select" aria-label="Default select example" id="is_closed" name="bars[is_closed]">
-                        <option selected value=false>Open for Business</option>
-                        <option value=true>Closed Down</option>
-                      </select>
-                </div>
-                <div class="mb-3">
-                    <% bar.images.forEach(function(img,i){ %>
-                    <img src="<%=img.url%>" class ="img-thumbnail" alt="">
-                    <div class="form-check-inline">
-                        <input type="checkbox"  id="image-<%=i%>" name="deleteImages[]" value="<%=img.url%>">
-                    </div>
-                    <label for="image-<%=i%>">Delete Image?</label>
-                    <% }) %>  
-                </div>
+<div class="row">
+  <h1 class="text-center">Edit Bar Information</h1>
+  <div class="col-md-6 offset-md-3">
+    <div class="card shadow">
+      <div class="card-body">
+        <form
+          action="/bars/<%=bar._id%>?_method=PUT"
+          method="POST"
+          novalidate
+          class="validatedForm"
+          enctype="multipart/form-data"
+        >
+          <div class="mb-3">
+            <label for="name" class="form-label">Name of Bar</label>
+            <input
+              type="text"
+              class="form-control"
+              name="bars[name]"
+              id="name"
+              value="<%=bar.name%>"
+              required
+            />
+          </div>
+          <div class="mb-3">
+            <label for="location" class="form-label">Displayed Address</label>
+            <input
+              type="text"
+              class="form-control"
+              name="bars[location.display_address]"
+              id="location"
+              value="<%=bar.location.display_address%>"
+              required
+            />
+          </div>
+          <div class="mb-3">
+            <label for="zip_code" class="form-label">Postal Code</label>
+            <input
+              type="text"
+              class="form-control"
+              name="bars[location.zip_code]"
+              id="zip_code"
+              value="<%=bar.location.zip_code%>"
+              required
+            />
+          </div>
+          <div class="mb-3">
+            <label for="image" class="form-label">Add Images</label>
+            <input
+              class="form-control"
+              type="file"
+              name="image"
+              id="image"
+              multiple
+            />
+          </div>
+          <div>
+            <label for="price" class="form-label">Price Range </label>
+            <div class="input-group mb-3">
+              <span class="input-group-text" id="addon-wrapping">$</span>
+              <input
+                type="text"
+                class="form-control"
+                value="<%=bar.price%>"
+                name="bars[price]"
+                id="price"
+                placeholder="from $ to $$$$"
+                aria-describedby="addon-wrapping"
+                required
+              />
             </div>
-                <button class="btn btn-primary mt-1">Update Bar Information</button>
-                </form>
-            <p>
-                <a class ="btn btn-secondary mt-3 "href="/bars">Back to Bars</a>
-            </p>
-        </div>
+            <div class="mb-3">
+              <label for="is_closed" class="form-label"
+                >Status of Business</label
+              >
+              <select
+                class="form-select"
+                aria-label="Default select example"
+                id="is_closed"
+                name="bars[is_closed]"
+              >
+                <option selected value="false">Open for Business</option>
+                <option value="true">Closed Down</option>
+              </select>
+            </div>
+            <div class="mb-3">
+              <% bar.images.forEach(function(img,i){ %>
+              <img src="<%=img.url%>" class="img-thumbnail" alt="" />
+              <div class="form-check-inline">
+                <input
+                  type="checkbox"
+                  id="image-<%=i%>"
+                  name="deleteImages[]"
+                  value="<%=img.url%>"
+                />
+              </div>
+              <label for="image-<%=i%>">Delete Image?</label>
+              <% }) %>
+            </div>
+          </div>
+          <button class="btn btn-primary mt-1">Update Bar Information</button>
+        </form>
+        <p>
+          <a class="btn btn-secondary mt-3" href="/bars">Back to Bars</a>
+        </p>
+      </div>
     </div>
+  </div>
+</div>

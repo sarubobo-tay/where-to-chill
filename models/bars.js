@@ -2,6 +2,7 @@ const { string } = require('joi');
 const mongoose = require('mongoose');
 const Review = require('./review');
 const Schema = mongoose.Schema;
+const opts = {toJSON:{virtuals:true}};
 
 const BarSchema = new Schema({
     // id: String,
@@ -24,10 +25,17 @@ const BarSchema = new Schema({
         title:String
     }],
     rating:Number,
-    coordinates:{
-        latitude:Number,
-        longitude:Number
+    geometry:{
+        type:{
+            type:String,
+            enum:['Point'],
+            required:true
         },
+        coordinates:{
+            type:[Number],
+            required:true
+        }
+    },
     // transactions: Array,
     price:{
         type: String,
@@ -67,8 +75,16 @@ const BarSchema = new Schema({
             type:Schema.Types.ObjectId,
             ref:'Review'
         }
-    ]
-});
+    ],
+},opts);
+
+BarSchema.virtual('properties.mapPopUp').get(function (){
+    return `<strong><a href="/bars/${this._id}">${this.name}</a></strong>
+    <p><strong>Price: </strong>${this.price}</p>
+    <p>><strong>Address: </strong>${this.location.display_address}</p>
+    <p>><strong>Contact Them: </strong>${this.display_phone}</p>`
+
+})
 
 BarSchema.post('findOneAndDelete', async function(doc){
     if(doc){

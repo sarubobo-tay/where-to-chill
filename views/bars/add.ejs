@@ -1,17 +1,34 @@
 <% layout('layouts/boilerplate')%>
 
-    <div class="row">
-        <h1 class="text-center">Add Image</h1>
-        <div class="col-6 offset-3">
-            <form action="/bars/<%=bar._id%>?_method=PUT" method="POST" novalidate class="validatedForm" enctype="multipart/form-data">
-                  <div class="mb-3 mt-2">
-                    <label for="image" class ="form-label">Add Images</label>
-                    <input type="file" class="form-control" name="image" id="image" multiple>
-                    </div>
-                    <button class="btn btn-success mt-1">Add Image</button>
-            </form>
-            <p>
-                <a class ="btn btn-secondary mt-3 "href="/bars/<%=bar._id%>">Back</a>
-            </p>
-        </div>
+<div class="row">
+  <h1 class="text-center">Add Image</h1>
+  <div class="col-md-6 offset-md-3">
+    <div class="card shadow">
+        <img src="https://images.unsplash.com/photo-1513309914637-65c20a5962e1?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1050&q=80" alt="..." class="card-img-top">
+      <div class="card-body">
+        <form
+          action="/bars/<%=bar._id%>?_method=PUT"
+          method="POST"
+          novalidate
+          class="validatedForm"
+          enctype="multipart/form-data"
+        >
+          <div class="mb-3 mt-2">
+            <label for="image" class="form-label">Add Images</label>
+            <input
+              type="file"
+              class="form-control"
+              name="image"
+              id="image"
+              multiple
+            />
+          </div>
+          <button class="btn btn-success mt-1">Add Image</button>
+        </form>
+        <p>
+          <a class="btn btn-secondary mt-3" href="/bars/<%=bar._id%>">Back</a>
+        </p>
+      </div>
     </div>
+  </div>
+</div>

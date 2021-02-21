@@ -1,7 +1,9 @@
 <% layout('layouts/boilerplate')%>
     <div class="row">
         <h1 class="text-center">Upload New Listing</h1>
-        <div class="col-6 offset-3">
+        <div class="col-md-6 offset-md-3">
+            <div class="card shadow">
+                <div class="card-body">
             <form action="/bars" method="POST" novalidate class="validatedForm" enctype="multipart/form-data">
                 <div class="mb-3">
                     <label for="name" class ="form-label">Name of Bar</label>
@@ -44,6 +46,8 @@
                 <a href="/bars">Back to Bars</a>
             </p>
         </div>
+    </div>
+    </div>
     </div>
 
 

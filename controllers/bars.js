@@ -1,5 +1,8 @@
 const Bars = require('../models/bars');
 const {cloudinary} = require("../cloudinary");
+const mbxGeocoding = require('@mapbox/mapbox-sdk/services/geocoding');
+const mapBoxToken = process.env.MAPBOX_TOKEN;
+const geocoder = mbxGeocoding({accessToken: mapBoxToken});
 
 module.exports.index = async(req,res)=>{
     const bars = await Bars.find({});
@@ -11,12 +14,17 @@ module.exports.newForm = (req,res)=>{
 };
 
 module.exports.create = async(req,res,next)=>{
-    // if(!req.body.bars) throw new ExpressError('Invalid Input Data',400);
+    const geoData = await geocoder.forwardGeocode({
+        query:req.body.bars.location.display_address,
+        proximity:[103.80955997872707,1.3498864521791063],
+        limit:1
+    }).send()
     const bar = new Bars(req.body.bars);
+    bar.geometry = geoData.body.features[0].geometry;
     bar.images = req.files.map(f=>({url:f.path, filename: f.filename}));
     bar.author = req.user.id;
     await bar.save();
-    req.flash('success','This is the flash message for success');
+    req.flash('success','Successfully created new Bar listing');
     res.redirect(`/bars/${bar._id}`);
 };
 

@@ -15,6 +15,7 @@ const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const User = require('./models/user');
 
+
 //Routes
 const barsRoutes = require('./routes/bars');
 const reviewRoutes = require('./routes/reviews');
@@ -46,13 +47,16 @@ app.use(express.urlencoded({extended:true}));
 app.use(methodOverride('_method'));
 app.use(express.static(path.join(__dirname,'public')));
 
+
 const sessionConfig ={
+    name :"session",
     secret:'qwerty123',
     resave:false,
     saveUninitialized:true,
     cookie:{
         //a week
         httpOnly:true,
+        secure:true,
         expires: Date.now() + (1000*60*60*24*7),
         maxAge : 1000*60*60*24*7
     }
@@ -87,6 +91,9 @@ app.use('/',userRoutes);
 //homepage
 app.get('/',(req,res)=>{
     res.render('home')
+})
+app.get('/about',(req,res)=>{
+    res.render('about')
 })
 
 

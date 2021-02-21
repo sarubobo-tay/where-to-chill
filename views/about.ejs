@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Site</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl"
+      crossorigin="anonymous"/>
+      <link rel="stylesheet" href="/css/stars.css">
+      <script src="https://kit.fontawesome.com/2cc3661542.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/css/img.css">
+</head>
+<body>
+    <%-include('./partials/navbar')%>
+    <div class="col-md-8 offset-2">
+        <div class="card" style="width : 100%; height: auto;">
+        <h1 class = "text-center mt-3">About Where To Chill &#x1F37A </h1>
+        <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner">
+              <div class="carousel-item active">
+                  <!-- hardcode first. -->
+                <img class="d-block w-100" style ="height:600px;" src="https://res.cloudinary.com/overcookedsushi/image/upload/v1613913680/where-chill/TravelPhotos/20180114_150825_hzcmhw.jpg" alt="" />
+              </div>
+              <div class="carousel-item">
+                <img src="https://res.cloudinary.com/overcookedsushi/image/upload/v1613913720/where-chill/TravelPhotos/20170903_064741_psdusu.jpg"  style ="height:600px;" class="d-block w-100" alt="...">
+              </div>
+              <div class="carousel-item">
+                <img src="https://res.cloudinary.com/overcookedsushi/image/upload/v1613913684/where-chill/TravelPhotos/20171224_235411_nbierf.jpg" class="d-block w-100" 
+                style ="height:600px;"alt="...">
+              </div>
+              <div class="carousel-item">
+                <img src="https://res.cloudinary.com/overcookedsushi/image/upload/v1613913715/where-chill/TravelPhotos/g1864811_1514609202814_high_nrm9pb.jpg" class="d-block w-100" alt="..." style ="height:600px;">
+              </div>
+              <div class="carousel-item">
+                <img src="https://res.cloudinary.com/overcookedsushi/image/upload/v1613913692/where-chill/TravelPhotos/dsc09249_zadn3e.jpg" class="d-block w-100" alt="..."style ="height:600px;">
+              </div>
+            </div>
+              <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls"  data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+              </button>
+              <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls"  data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+              </button>
+          </div>
+        <div class="card-body">
+          <h2 class="card-text"><strong>Finding and Curating the Best Places to Chill </strong></h2>
+          <h5>Time should be spent pursuing your <strong>Goals</strong> and doing the things you <strong>Love</strong>, not wasting time figuring out where to go <i>(to chill)</i>. This site's purpose is to log my adventures, providing reviews for the Bars across Singapore, so that the future me knows where is the best place to chill</h5>
+          <p style="bottom:0px;">Credits to YELP for the freely available API to pull the Bars in SG.</p>
+        </div>
+        </div>
+        <div class="row">
+        <div class="card col-lg-6 mt-3 mb-5"  style="padding: 0;">
+            <h5 class="card-header">Site Features</h5>
+            <div class="card-body">
+              <h5 class="card-title">Bars to Chill at</h5>
+              <a href="/bars" class="btn btn-success">Click Here to View Bars</a>
+              <p class="card-text">Included Mapping out of the bars in Singapore, displaying their address, contact details and price range. Also enabled reviewing functionalities. A user may add a review anonymously, but requires to be logged in to edit or delete own reviews.</p>
+              <h5 class="card-title mt-3">Countries to Chill at</h5>
+              <a href="#" class="btn btn-dark text-muted">This feature is being worked on</a>
+              <p class="card-text"></p>
+            </div>
+          </div>
+        <div class="card col-lg-6 mt-3 " style="padding: 0;">
+            <h5 class="card-header">Contact Me</h5>
+            <div class="card-body">
+              <h5 class="card-title">About Me</h5>
+              <p class="card-text">Graduate from Nanyang Technological University specialized in Engineering and Management. Seeking opportunities in Software Development. Do drop me an e-mail below to contact me or for a resume.</p>
+            <h5 class="card-title">My Sites</h5>
+            <a href="https://www.facebook.com/Overcookedsushi/" ><i class="fab fa-facebook-square fa-3x"></i>
+              </a>
+            <a style="color: black" href="https://github.com/Sherman-Tay" ><i class="fab fa-github-square fa-3x"></i>
+              </a>
+            <a style="color:plum"href="https://www.instagram.com/overcookedsushi/?hl=en" ><i class="fab fa-instagram-square fa-3x"></i>
+              </a>
+            <a href="https://www.linkedin.com/in/tay-sherman/" ><i class="fab fa-linkedin fa-3x"></i>
+            <a style="color:orange" href="mailto:shermantayjunyang@gmail.com" ><i class="fab fa-google fa-3x"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+    </div>
+    <%-include('./partials/footer')%>
+    <script
+      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.6.0/dist/umd/popper.min.js"
+      integrity="sha384-KsvD1yqQ1/1+IA7gi3P0tyJcT3vR+NdBTt13hSJ2lnve8agRGXTTyNaBYmCR/Nwi"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.min.js"
+      integrity="sha384-nsg8ua9HAw1y0W1btsyWgBklPnCUAFLuTMS2G72MMONqmOymq585AcH49TLBQObG"
+      crossorigin="anonymous"
+    ></script>
+    
+    <script src='/js/validateForms.js'></script>
+</body>
+</html>
