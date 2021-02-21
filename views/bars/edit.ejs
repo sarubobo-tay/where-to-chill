@@ -2,7 +2,7 @@
 
     <div class="row">
         <h1 class="text-center">Edit Bar Information</h1>
-        <div class="col-6 offset-3">
+        <div class="col-8 offset-2">
             <form action="/bars/<%=bar._id%>?_method=PUT" method="POST" novalidate class="validatedForm" enctype="multipart/form-data">
                 <div class="mb-3">
                     <label for="name" class ="form-label">Name of Bar</label>
@@ -16,10 +16,10 @@
                     <label for="zip_code" class ="form-label">Postal Code</label>
                     <input type="text" class="form-control" name="bars[location.zip_code]" id="zip_code" value ="<%=bar.location.zip_code%>"required>
                 </div>
-                  <div class="mb-3 mt-2">
-                    <label for="image" class ="form-label">Add Images</label>
-                    <input type="file" name="image" id="image" multiple>
-                </div>
+                <div class="mb-3">
+                    <label for="image" class="form-label">Add Images</label>
+                    <input class="form-control" type="file" name ="image" id="image" multiple>
+                  </div>
                   <div class="mb-3 mt-2">
                     <label for="image_url" class ="form-label">URL (if available)</label>
                     <input type="text" class="form-control" name="bars[url]" id="image_url" value="<%=bar.url%>">
@@ -37,7 +37,15 @@
                         <option value=true>Closed Down</option>
                       </select>
                 </div>
-                
+                <div class="mb-3">
+                    <% bar.images.forEach(function(img,i){ %>
+                    <img src="<%=img.url%>" class ="img-thumbnail" alt="">
+                    <div class="form-check-inline">
+                        <input type="checkbox"  id="image-<%=i%>" name="deleteImages[]" value="<%=img.url%>">
+                    </div>
+                    <label for="image-<%=i%>">Delete Image?</label>
+                    <% }) %>  
+                </div>
             </div>
                 <button class="btn btn-primary mt-1">Update Bar Information</button>
                 </form>

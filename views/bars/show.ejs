@@ -45,23 +45,23 @@
 
         <div class="card-body">
           <a class="btn btn-primary" href="/bars/<%=bar._id%>/edit"
-            >Edit Information</a
+            >Edit Info</a
           >
           <a class="btn btn-warning" href="/bars/<%=bar._id%>/add"
-            >Add Image</a
+            >Add Images</a
           >
 
-          <a class="btn btn-secondary" href="/bars">Back to All Bars</a>
+          <a class="btn btn-secondary" href="/bars">Back</a>
           <% if(currentUser && bar.author.equals(currentUser)){%>
           <form
             class="d-inline"
             action="/bars/<%=bar._id%>?_method=delete"
             method="POST"
           >
-            <button class="btn btn-danger">Delete Listing</button>
+            <button class="btn btn-danger">Delete Bar</button>
           </form>
           <%} else{%>
-          <a class="btn btn-dark text-muted" href="#">Log in Admin to Delete</a>
+          <a class="btn btn-dark text-muted" href="#">Login Admin to Delete</a>
           <%}%>
         </div>
       </div>

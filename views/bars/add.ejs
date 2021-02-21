@@ -6,12 +6,12 @@
             <form action="/bars/<%=bar._id%>?_method=PUT" method="POST" novalidate class="validatedForm" enctype="multipart/form-data">
                   <div class="mb-3 mt-2">
                     <label for="image" class ="form-label">Add Images</label>
-                    <input type="file" name="image" id="image" multiple>
+                    <input type="file" class="form-control" name="image" id="image" multiple>
                     </div>
                     <button class="btn btn-success mt-1">Add Image</button>
             </form>
             <p>
-                <a class ="btn btn-secondary mt-3 "href="/bars">Back to Bars</a>
+                <a class ="btn btn-secondary mt-3 "href="/bars/<%=bar._id%>">Back</a>
             </p>
         </div>
     </div>

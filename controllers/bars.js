@@ -1,4 +1,5 @@
 const Bars = require('../models/bars');
+const {cloudinary} = require("../cloudinary");
 
 module.exports.index = async(req,res)=>{
     const bars = await Bars.find({});
@@ -51,6 +52,10 @@ module.exports.submitEdit = async(req,res)=>{
     const imgs = req.files.map(f=>({url:f.path, filename: f.filename}));
     bar.images.push(...imgs);
     await bar.save();
+    if(req.body.deleteImages){
+        await bar.updateOne({$pull:{images:{url:{$in:req.body.deleteImages}}}})
+    }
+    
     req.flash('success','Successfully Updated bars');
     res.redirect(`/bars/${bar._id}`);
 };
