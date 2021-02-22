@@ -25,7 +25,7 @@ module.exports.isReviewOwner = async (req, res, next) => {
     const review = await Review.findById(reviewId);
 
     if (!review.author.equals(req.user._id)) {
-        if (!review.author.equals('602ea2e247191a745d76f2de')) {
+        if (!review.author.equals('603322664352930015213fab')) {
             req.flash('error', 'Error. Permission needed to proceed');
             return res.redirect(`/bars/${id}`);
         }
