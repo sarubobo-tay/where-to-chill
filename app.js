@@ -15,6 +15,7 @@ const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const MongoStore = require('connect-mongo')(session);
 const User = require('./models/user');
+const PassportHerokuAddon = require('passport-heroku-addon');
 
 
 //Routes
@@ -26,7 +27,7 @@ const dbUrl = process.env.DB_URL;
 //Connect to db
 // process.env.DB_URL
 //'mongodb://localhost:27017/where-chill'
-mongoose.connect(dbUrl ||'mongodb://localhost:27017/where-chill', { 
+mongoose.connect(dbUrl, { 
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useFindAndModify:false,
@@ -50,6 +51,7 @@ app.set('views',path.join(__dirname,'views'));
 app.use(express.urlencoded({extended:true}));
 app.use(methodOverride('_method'));
 app.use(express.static(path.join(__dirname,'public')));
+app.enable('trust proxy');
 
 const secret = process.env.SECRET || 'backupsecret';
 
@@ -69,6 +71,7 @@ const sessionConfig ={
     secret:secret,
     resave:false,
     saveUninitialized:true,
+    proxy:true,
     cookie:{
         //a week
         httpOnly:true,

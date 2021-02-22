@@ -68,7 +68,7 @@ const BarSchema = new Schema({
     author:{
         type: Schema.Types.ObjectId,
         ref:'User',
-        default: "602e91fdc9fbf77222b16150"
+        default: "6032a0d199247200155947e7"
     },
     reviews:[
         {

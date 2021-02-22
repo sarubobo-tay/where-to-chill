@@ -5,7 +5,7 @@ module.exports.submitReview = async(req,res)=>{
     const bar = await Bars.findById(req.params.id);
     const review = new Review(req.body.review);
     if(req.user == null){
-        review.author = '602ea2e247191a745d76f2de'
+        review.author = '6032a0d199247200155947e7'
     } else {
         review.author = req.user._id
     }

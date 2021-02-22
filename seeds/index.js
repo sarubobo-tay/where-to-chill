@@ -3,7 +3,8 @@ const Schema = mongoose.Schema;
 var Bars = require('../models/bars');
 var seed = require('./seed.json');
 
-mongoose.connect('mongodb://localhost:27017/where-chill', { useNewUrlParser: true, useUnifiedTopology: true })
+const dbUrl = process.env.DB_URL;
+mongoose.connect(dbUrl, { useNewUrlParser: true, useUnifiedTopology: true })
 .then(() => {
     console.log("Mongo Connection Open")
 })
