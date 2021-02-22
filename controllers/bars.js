@@ -16,7 +16,7 @@ module.exports.newForm = (req,res)=>{
 module.exports.create = async(req,res,next)=>{
     const geoData = await geocoder.forwardGeocode({
         query:req.body.bars.location.display_address,
-        proximity:[103.80955997872707,1.3498864521791063],
+        proximity:[103.8536,1.2789],
         limit:1
     }).send()
     const bar = new Bars(req.body.bars);
