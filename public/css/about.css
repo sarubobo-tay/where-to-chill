@@ -1,0 +1,12 @@
+body{
+    /* height: 100vh; */
+    background-image: linear-gradient(rgba(0,0,0,0.3),rgba(0,0,0,0.3)), url("https://images.unsplash.com/photo-1565452122372-c38b171b9629?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1934&q=80");
+    background-size: cover;
+    background-position: center;
+}
+
+.text-center {
+    color: white;
+    border-bottom-color: white;
+}
+
